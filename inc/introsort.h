@@ -6,5 +6,7 @@
 #define INTROSORT_H
 
 void insertionSort(int array[], int start, int end);
+void heapify(int array[], int size, int element);
+void heapsort(int array[], int size);
 
 #endif

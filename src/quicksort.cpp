@@ -13,10 +13,13 @@ void swap(int& i, int& j) {
 
 int divide(int array[], int start, int end) {
 
-    int pivot = array[end];
+    int m = start+(end-start)/2;
+    int pivot = array[m];
     int i = start;
 
-    for (int j = start ; j < end; ++j)
+    swap(array[m],array[end]);
+
+    for (int j = start ; j < end; j++)
     {
         if (array[j] <= pivot)
         {
@@ -25,8 +28,7 @@ int divide(int array[], int start, int end) {
         }
     }
 
-    array[end] = array[i];
-    array[i] = pivot;
+    swap(array[end],array[i]);
 
     return i;
 }
@@ -41,5 +43,3 @@ void quicksort(int array[], int start, int end) {
         quicksort(array, i + 1, end);
     }
 }
-
-

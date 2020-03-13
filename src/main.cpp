@@ -6,20 +6,20 @@
 #include "dataArray.h"
 #include "test.h"
 
-#define NO_OF_ARRAYS 1
+#define NO_OF_ARRAYS 100
 
 using namespace std;
 
 int main() {
 
     cout << endl << "Program tests time performance of three sorting algorithms: mergesort, quicksort and introsort."
-         << endl << "Press enter to start." ;
+         << endl << "Press enter to start."
+         << endl;
 
     if (cin.get() == '\n') {
 
-        vector<int> arrayLengths = {10, 100};
+        vector<int> arrayLengths = {10000,50000,100000,500000,1000000};
         vector<double> sortedPercentage = {0.0, 25.0, 50.0, 75.0, 95.0, 99.0, 99.7, 100.0};
-
 
         for (int i = 0; i < arrayLengths.size(); ++i) {
             for (int j = 0; j < sortedPercentage.size(); ++j) {
@@ -27,13 +27,10 @@ int main() {
                 test(NO_OF_ARRAYS, arrayLengths[i], sortedPercentage[j]);
 
             }
-
         }
-
     }
 
     return 0;
-
 }
 
 

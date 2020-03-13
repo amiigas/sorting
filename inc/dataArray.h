@@ -16,8 +16,7 @@ class DataArray {
         DataArray(int s);
         ~DataArray();
         void fill(double sortedPercentage);
-
-
+        bool isSorted();
 };
 
 std::ostream& operator << (std::ostream &stream, const DataArray &dataArray);

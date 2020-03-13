@@ -4,12 +4,16 @@
 
 #include <iostream>
 #include <chrono>
+#include <cmath>
 
 #include "test.h"
 #include "dataArray.h"
 #include "mergesort.h"
 #include "quicksort.h"
+#include "introsort.h"
 
+#define BOLDRED "\033[1;31m"
+#define BOLDGREEN "\033[1;32m"
 #define BOLDRED "\033[1m\033[31m"
 #define YELLOW  "\033[33m"
 #define RESET   "\033[0m"
@@ -35,11 +39,16 @@ void test(int amount, int size, double sortedPercentage) {
         mergesort(array.data, 0, array.size - 1);
         auto stop = chrono::high_resolution_clock::now();
 
+        if (!array.isSorted()) {
+            cout << BOLDRED << "Array not sorted" << RESET << endl;
+            break;
+        }
+
         chrono::duration<double, std::milli> oneSort = stop - start;
         mergesortElapsedTime += oneSort;
     }
 
-    cout << BOLDRED << mergesortElapsedTime.count() << RESET << " ms " << YELLOW << "mergesort" << RESET << endl;
+    cout << BOLDGREEN << mergesortElapsedTime.count() << RESET << " ms " << YELLOW << "mergesort" << RESET << endl;
 
 
     for (int i = 0; i < amount ; ++i) {
@@ -52,11 +61,16 @@ void test(int amount, int size, double sortedPercentage) {
         quicksort(array.data, 0, array.size - 1);
         auto stop = chrono::high_resolution_clock::now();
 
+        if (!array.isSorted()) {
+            cout << BOLDRED << "Array not sorted" << RESET << endl;
+            break;
+        }
+
         chrono::duration<double, std::milli> oneSort = stop - start;
         quicksortElapsedTime += oneSort;
     }
 
-    cout << BOLDRED << quicksortElapsedTime.count() << RESET << " ms " << YELLOW << "quicksort" << RESET << endl;
+    cout << BOLDGREEN << quicksortElapsedTime.count() << RESET << " ms " << YELLOW << "quicksort" << RESET << endl;
 
 
     for (int i = 0; i < amount ; ++i) {
@@ -66,14 +80,19 @@ void test(int amount, int size, double sortedPercentage) {
 
         // measure introsorting time
         auto start = chrono::high_resolution_clock::now();
-        //introsort(array.data);
+        introsort(array.data, 0, array.size - 1, 2*log2(array.size));
         auto stop = chrono::high_resolution_clock::now();
+
+        if (!array.isSorted()) {
+            cout << BOLDRED << "Array not sorted" << RESET << endl;
+            break;
+        }
 
         chrono::duration<double, std::milli> oneSort = stop - start;
         introsortElapsedTime += oneSort;
     }
 
-    cout << BOLDRED << introsortElapsedTime.count() << RESET << " ms " << YELLOW << "introsort" << RESET << endl;
+    cout << BOLDGREEN << introsortElapsedTime.count() << RESET << " ms " << YELLOW << "introsort" << RESET << endl;
 
 
 }
